@@ -1,0 +1,69 @@
+{% extends 'base.njk' %} {% block body %}
+
+<main class="container mt-5">
+  <form class="row g-3">
+    <div class="col-md-6">
+      <label for="name" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="name" />
+      <small class="small text-danger">Nome inválido</small>
+    </div>
+    <div class="col-md-6">
+      <label for="lastName" class="form-label">Sobrenome</label>
+      <input type="text" class="form-control" id="lastName" />
+      <small class="small text-danger">Sobrenome inválido</small>
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">E-mail</label>
+      <input type="email" class="form-control" id="email" placeholder="apollo.bl@email.com" />
+      <small class="small text-danger">E-mail inválido</small>
+    </div>
+    <div class="col-md-6">
+      <label for="password" class="form-label">Senha</label>
+      <input type="password" class="form-control" id="password" />
+      <small class="small text-danger">Senha inválida</small>
+    </div>
+    <div class="col-md-4">
+      <label for="instagram" class="form-label">Instagram</label>
+      <input type="text" class="form-control" id="instagram" placeholder="@gabriel.hsilva" />
+    </div>
+    <div class="col-md-4">
+      <label for="twitter" class="form-label">Twitter</label>
+      <input type="text" class="form-control" id="twitter" placeholder="@Gabriel_hsilva" />
+    </div>
+    <div class="col-md-4">
+      <label for="linkedin" class="form-label">LinkedIn</label>
+      <input type="text" class="form-control" id="linkedin" placeholder="/in/ogabriel-henrique/" />
+    </div>
+    <div class="col-md-6">
+      <label for="bio" class="form-label">Bio</label>
+      <textarea id="bio" class="form-control"></textarea>
+      <small id="textareaMaxLenght">150</small>
+    </div>
+    <div class="col-md-3">
+      <label for="state" class="form-label">Estado</label>
+      {% if ufs %}
+      <select id="state" class="form-select">
+        {% for uf in ufs %}
+        <option value="{{ uf.sigla }}">{{ uf.nome }}</option>
+        {% endfor %}
+      </select>
+      {% else %}
+      <input type="text" class="form-control" id="state" />
+      <small class="small text-danger">Estado inválido</small>
+      {% endif %}
+    </div>
+    <div class="col-md-3">
+      <label for="gender" class="form-label">Sexo</label>
+      <select id="gender" class="form-select">
+        <option value="M" selected>Masculino</option>
+        <option value="F">Feminino</option>
+        <option value="O">Outro</option>
+      </select>
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Sign in</button>
+    </div>
+  </form>
+</main>
+
+{% endblock %}
