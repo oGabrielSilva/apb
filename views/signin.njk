@@ -1,7 +1,7 @@
 {% extends 'base.njk' %} {% block body %}
 
 <main class="container mt-5">
-  <form class="row g-3">
+  <form class="row g-3" id="signIn">
     <div class="col-md-6">
       <label for="name" class="form-label">Nome</label>
       <input type="text" class="form-control" id="name" />
@@ -36,8 +36,7 @@
     </div>
     <div class="col-md-6">
       <label for="bio" class="form-label">Bio</label>
-      <textarea id="bio" class="form-control"></textarea>
-      <small id="textareaMaxLenght">150</small>
+      <textarea style="height: 98px;" id="bio" class="form-control"></textarea>
     </div>
     <div class="col-md-3">
       <label for="state" class="form-label">Estado</label>
@@ -61,7 +60,7 @@
       </select>
     </div>
     <div class="col-12">
-      <button type="submit" class="btn btn-primary">Sign in</button>
+      <button type="submit" class="btn btn-primary">Cadastrar-se</button>
     </div>
   </form>
 </main>
