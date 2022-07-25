@@ -4,23 +4,23 @@
   <form class="row g-3" id="signIn">
     <div class="col-md-6">
       <label for="name" class="form-label">Nome</label>
-      <input type="text" class="form-control" id="name" />
-      <small class="small text-danger">Nome inválido</small>
+      <input required type="text" class="form-control" id="name" />
+      <small class="small text-danger d-none">Nome inválido</small>
     </div>
     <div class="col-md-6">
       <label for="lastName" class="form-label">Sobrenome</label>
-      <input type="text" class="form-control" id="lastName" />
-      <small class="small text-danger">Sobrenome inválido</small>
+      <input required type="text" class="form-control" id="lastName" />
+      <small class="small text-danger d-none">Sobrenome inválido</small>
     </div>
     <div class="col-md-6">
       <label for="email" class="form-label">E-mail</label>
-      <input type="email" class="form-control" id="email" placeholder="apollo.bl@email.com" />
-      <small class="small text-danger">E-mail inválido</small>
+      <input required type="email" class="form-control" id="email" placeholder="apollo.bl@email.com" />
+      <small class="small text-danger d-none">E-mail inválido</small>
     </div>
     <div class="col-md-6">
       <label for="password" class="form-label">Senha</label>
-      <input type="password" class="form-control" id="password" />
-      <small class="small text-danger">Senha inválida</small>
+      <input required type="password" class="form-control" id="password" />
+      <small class="small text-danger d-none">A senha precisa ter pelo menos 8 caracteres</small>
     </div>
     <div class="col-md-4">
       <label for="instagram" class="form-label">Instagram</label>
@@ -36,19 +36,17 @@
     </div>
     <div class="col-md-6">
       <label for="bio" class="form-label">Bio</label>
-      <textarea style="height: 98px;" id="bio" class="form-control"></textarea>
+      <textarea required style="height: 98px;" id="bio" class="form-control"></textarea>
+      <small class="small">150</small>
     </div>
     <div class="col-md-3">
-      <label for="state" class="form-label">Estado</label>
       {% if ufs %}
+      <label for="state" class="form-label">Estado</label>
       <select id="state" class="form-select">
         {% for uf in ufs %}
         <option value="{{ uf.sigla }}">{{ uf.nome }}</option>
         {% endfor %}
       </select>
-      {% else %}
-      <input type="text" class="form-control" id="state" />
-      <small class="small text-danger">Estado inválido</small>
       {% endif %}
     </div>
     <div class="col-md-3">

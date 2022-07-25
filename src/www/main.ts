@@ -1,5 +1,5 @@
-import FormValidation from './Modules/FormValidation';
+import formValidation from './Modules/formValidation';
 
 const form = document.querySelector('form');
 
-if (form) new FormValidation(form).init();
+if (form) formValidation(form);
