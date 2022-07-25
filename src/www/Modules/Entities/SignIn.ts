@@ -1,4 +1,6 @@
-class SignIn {
+import Entitie from './Entitie';
+
+class SignIn extends Entitie {
   private readonly name: string;
 
   private readonly lastName: string;
@@ -19,28 +21,18 @@ class SignIn {
 
   private readonly bio: string;
 
-  constructor({
-    name,
-    lastName,
-    email,
-    password,
-    instagram,
-    twitter,
-    linkedin,
-    gender,
-    state,
-    bio,
-  }: SignIn) {
-    this.name = name;
-    this.bio = bio;
-    this.email = email;
-    this.lastName = lastName;
-    this.password = password;
-    this.instagram = instagram;
-    this.twitter = twitter;
-    this.linkedin = linkedin;
-    this.gender = gender;
-    this.state = state;
+  constructor(data: SignIn, url: string) {
+    super(url);
+    this.name = data.name;
+    this.bio = data.bio;
+    this.email = data.email;
+    this.lastName = data.lastName;
+    this.password = data.password;
+    this.instagram = data.instagram;
+    this.twitter = data.twitter;
+    this.linkedin = data.linkedin;
+    this.gender = data.gender;
+    this.state = data.state;
   }
 }
 

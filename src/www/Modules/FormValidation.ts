@@ -1,4 +1,6 @@
+import axios from 'axios';
 import Constants from '../Constants/Constants';
+import Entitie from './Entities/Entitie';
 import SignIn from './Entities/SignIn';
 
 class FormValidation {
@@ -10,9 +12,12 @@ class FormValidation {
 
   private formValid: boolean;
 
+  private entitie: Entitie;
+
   constructor(form: HTMLFormElement) {
     this.form = form;
     this.formValid = false;
+    this.entitie = new SignIn({} as SignIn, '');
   }
 
   private maxLenght(max: number): void {
@@ -59,11 +64,13 @@ class FormValidation {
   }
 
   private throwErrors() {
-    console.log(this.form);
+    this.form.querySelectorAll('small').forEach((elm) => {
+      elm.classList.remove('d-none');
+    });
   }
 
   private submit() {
-    const signIn = new SignIn();
+    axios.post(this.entitie.getUrl(), this.entitie);
   }
 
   private validForm(): void {
