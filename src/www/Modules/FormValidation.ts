@@ -1,7 +1,8 @@
-import axios from 'axios';
 import Constants from '../Constants/Constants';
 import Entitie from './Entities/Entitie';
 import SignIn from './Entities/SignIn';
+
+type TAction = 'MAX_LEGHT' | 'VALID_INPUT';
 
 class FormValidation {
   private readonly form: HTMLFormElement;
@@ -12,12 +13,15 @@ class FormValidation {
 
   private formValid: boolean;
 
+  private errors: boolean[];
+
   private entitie: Entitie;
 
   constructor(form: HTMLFormElement) {
     this.form = form;
     this.formValid = false;
     this.entitie = new SignIn({} as SignIn, '');
+    this.errors = [];
   }
 
   private maxLenght(max: number): void {
@@ -41,26 +45,35 @@ class FormValidation {
 
     this.inputs.forEach((elm) => {
       this.input = elm;
-
-      switch (elm.id) {
-        case Constants.BIO_ID:
-          this.maxLenght(Constants.BIO_MAX_LENGHT);
-          break;
-        case Constants.NAME_ID:
-          this.maxLenght(Constants.NAME_MAX_LENGHT);
-          break;
-        case Constants.LAST_NAME_ID:
-          this.maxLenght(Constants.LAST_NAME_MAX_LENGHT);
-          break;
-        default:
-          this.maxLenght(Constants.MAX_LENGHT_DEFAULT);
-          break;
-      }
+      this.action(elm, 'MAX_LEGHT');
     });
   }
 
+  private action(elm: HTMLInputElement | HTMLTextAreaElement, action: TAction) {
+    switch (elm.id) {
+      case Constants.BIO_ID:
+        if (action === 'MAX_LEGHT') this.maxLenght(Constants.BIO_MAX_LENGHT);
+        break;
+      case Constants.NAME_ID:
+        if (action === 'MAX_LEGHT') this.maxLenght(Constants.NAME_MAX_LENGHT);
+        break;
+      case Constants.LAST_NAME_ID:
+        if (action === 'MAX_LEGHT') this.maxLenght(Constants.LAST_NAME_MAX_LENGHT);
+        break;
+      default:
+        if (action === 'MAX_LEGHT') this.maxLenght(Constants.MAX_LENGHT_DEFAULT);
+        break;
+    }
+  }
+
   private allValid(): boolean {
-    return this.formValid;
+    this.errors = [];
+
+    this.inputs.forEach((elm) => {
+      this.action(elm, 'VALID_INPUT');
+    });
+
+    return !!this.errors.length;
   }
 
   private throwErrors() {
@@ -70,7 +83,8 @@ class FormValidation {
   }
 
   private submit() {
-    axios.post(this.entitie.getUrl(), this.entitie);
+    this.form.setAttribute('action', this.entitie.getUrl());
+    this.form.submit();
   }
 
   private validForm(): void {
